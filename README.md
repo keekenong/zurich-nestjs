@@ -1,3 +1,14 @@
+# First time local setup
+Pre-requisite
+1) Install postgresql server in local device
+2) Nodejs >=v20.11
+3) Nestjs 11
+
+Run local-setup.sh for first-time local setup (Bash shell or Git Bash):
+```
+./local-setup.sh
+```
+
 # Project Structure
 
 The project is organized within the `src/` directory as follows:
