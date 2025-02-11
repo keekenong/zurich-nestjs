@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -14,17 +15,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        migrationsRun: true,
+        migrationsRun: configService.get<string>('NODE_ENV') !== 'development',
         migrationsTableName: '_migrations',
-        migrations: [__dirname + '/migrations/*{.ts,.js}'],
-        cli: {
-          migrationsDir: 'src/migrations',
-        },
+        migrations: [__dirname + '/../migrations/*{.ts,.js}'],
         synchronize: false,
-        logging: false, // Enable logging
+        logging: false,
         maxQueryExecutionTime: 1000, // Log queries taking longer than 1 second
         extra: {
-          connectionLimit: 10, // Use connection pooling
+          max: 10,
+          idleTimeoutMillis: 30000,
         },
       }),
     }),
