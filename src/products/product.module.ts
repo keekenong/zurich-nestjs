@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
 import { DatabaseModule } from '../database/database.module';
 import { LoggerModule } from '../utils/logger.module';
-import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
 import { CustomLogger } from '../utils/logger';
 
 @Module({
@@ -15,11 +14,7 @@ import { CustomLogger } from '../utils/logger';
     LoggerModule,
   ],
   controllers: [ProductController],
-  providers: [
-    ProductService,
-    CustomLogger,
-    { provide: CACHE_MANAGER, useExisting: CacheModule },
-  ],
+  providers: [ProductService, CustomLogger],
   exports: [ProductService],
 })
 export class ProductModule {}

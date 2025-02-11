@@ -16,7 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         migrationsRun: true,
         migrationsTableName: '_migrations',
-        migrations: [__dirname + '/../migrations/*{.ts,.js}'],
+        migrations: [__dirname + '/migrations/*{.ts,.js}'],
         cli: {
           migrationsDir: 'src/migrations',
         },
